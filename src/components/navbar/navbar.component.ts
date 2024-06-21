@@ -1,10 +1,17 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: '.app-navbar',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  show: boolean = false;
+
+  toggle() {
+    this.show = !this.show;
+  }
+}

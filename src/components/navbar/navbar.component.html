@@ -58,9 +58,9 @@
     <button
       class="hidden md:block bg-secondary px-6 py-2 font-bold shadow-sm text-white rounded-full text-center"
     >
-      <a href="/auth/signin"> Get Started</a>
+      <a href="/auth/signin">Get Started</a>
     </button>
-    <div class="md:hidden mr-4">
+    <div class="md:hidden mr-4" (click)="toggle()">
       <svg
         width="30px"
         height="30px"
@@ -97,4 +97,20 @@
       </svg>
     </div>
   </ul>
+  <div *ngIf="show" class="md:hidden bg-white shadow-md p-4 rounded-lg">
+    <li class="text-primary font-bold hover:border-primary pb-2">
+      <a href="/">Home</a>
+    </li>
+    <li class="text-primary font-bold hover:border-primary pb-2">
+      <a href="#">About</a>
+    </li>
+    <li class="text-primary font-bold hover:border-primary pb-2">
+      <a href="/courses">Courses</a>
+    </li>
+    <button
+      class="bg-secondary px-6 py-2 font-bold shadow-sm text-white rounded-full text-center w-full mt-4"
+    >
+      <a href="/auth/signin">Get Started</a>
+    </button>
+  </div>
 </div>

@@ -1,74 +1,82 @@
-<div class="app-layout">
-  <div class="m-4">
-    <div class="flex gap-12">
-      <div class="w-[40%]">
-        <div class="w-full">
-          <img
-            src="{{ course.images[0].uri }}"
-            alt="{{ course.images[0].name }}"
-            class="w-full h-ful object-cover rounded-xl"
-          />
-        </div>
-        <ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig">
-          <div *ngFor="let img of course?.images">
-            <div class="w-1/2 h-1/2 object-cover">
-              <img
-                src="{{ img?.uri }}"
-                alt="{{ img?.name }}"
-                class="w-full h-full"
-              />
-            </div>
-          </div>
-        </ngx-slick-carousel>
+<div class="app-layout p-4 md:m-4">
+  <div class="flex flex-col md:flex-row md:gap-12 gap-6">
+    <div class="w-full md:w-[40%]">
+      <div class="w-full">
+        <img
+          src="{{ course.images[0].uri }}"
+          alt="{{ course.images[0].name }}"
+          class="w-full h-auto object-cover rounded-xl"
+        />
       </div>
-      <div class="w-[60%]">
-        <p class="text-3xl font-bold">
-          {{ course.title }}
-        </p>
-        <p class="text-xl font-semibold">{{ course.level }}L</p>
-        <p class="text-justify py-2">{{ course.description }}</p>
-
-        <div class="flex gap-24 w-full items-center justify-between mt-16">
-          <button class="w-1/2 bg-secondary text-white rounded-lg py-4">
-            <a href="#">Start Quiz</a>
-          </button>
-          <button
-            (click)="copyUrl()"
-            class="w-1/2 bg-secondary text-white rounded-lg py-4"
-          >
-            Share
-          </button>
+      <ngx-slick-carousel
+        class="hidden md:block"
+        #slickModal="slick-carousel"
+        [config]="slideConfig"
+      >
+        <div *ngFor="let img of course?.images">
+          <div class="w-full h-1/2 object-cover">
+            <img
+              src="{{ img?.uri }}"
+              alt="{{ img?.name }}"
+              class="w-full h-full"
+            />
+          </div>
         </div>
+      </ngx-slick-carousel>
+    </div>
+    <div class="w-full md:w-[60%] px-4 md:px-0">
+      <p class="text-3xl font-bold">
+        {{ course.title }}
+      </p>
+      <p class="text-xl font-semibold">{{ course.level }}L</p>
+      <p class="text-justify py-2">{{ course.description }}</p>
+
+      <div class="flex flex-row gap-4 w-full items-center justify-between mt-4">
+        <button class="w-full md:w-1/2 bg-secondary text-white rounded-lg py-4">
+          <a href="#">Start Quiz</a>
+        </button>
+        <button
+          (click)="copyUrl()"
+          class="w-full md:w-1/2 bg-secondary text-white rounded-lg py-4"
+        >
+          Share
+        </button>
       </div>
     </div>
-    <mat-tab-group>
-      <mat-tab label="Description"> {{ course.description }} </mat-tab>
+  </div>
+  <mat-tab-group class="mt-4">
+    <mat-tab label="Description">
+      <div class="p-4">
+        {{ course.description }}
+      </div>
+    </mat-tab>
 
-      <mat-tab label="Quiz">
-        <div class="my-4 grid grid-cols-4 gap-4 w-full">
-          <div *ngFor="let quiz of quizes">
-            <div class="shadow-md rounded-md">
-              <a
-                href="/quiz/{{ quiz._id }}"
-                class="w-full h-50 rounded-lg shadow-md"
-              >
-                <div class="px-4">
-                  <p class="font-semibold py-4">
-                    {{ quiz.name }}
-                  </p>
-                  <p>
-                    {{
-                      quiz.description.length > 20
-                        ? quiz.description.substring(0, 20) + "..."
-                        : quiz.description
-                    }}
-                  </p>
-                </div>
-              </a>
-            </div>
+    <mat-tab label="Quiz">
+      <div
+        class="my-4 px-2 md:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
+      >
+        <div *ngFor="let quiz of quizes">
+          <div class="shadow-md rounded-md">
+            <a
+              href="/quiz/{{ quiz._id }}"
+              class="w-full h-auto rounded-lg shadow-md block"
+            >
+              <div class="px-4">
+                <p class="font-semibold py-4">
+                  {{ quiz.name }}
+                </p>
+                <p>
+                  {{
+                    quiz.description.length > 20
+                      ? quiz.description.substring(0, 20) + "..."
+                      : quiz.description
+                  }}
+                </p>
+              </div>
+            </a>
           </div>
         </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
