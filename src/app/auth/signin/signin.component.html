@@ -1,0 +1,131 @@
+<div class="px-8">
+  <div class="flex items-center">
+    <svg
+      fill="#2248dd"
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="50px"
+      height="50px"
+      viewBox="0 0 544.316 544.316"
+      xml:space="preserve"
+      stroke="#2248dd"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <g>
+          <g>
+            <path
+              d="M272.164,340.276L89.452,274.884l0.625,119.831c0,0,85.447,43.077,182.087,43.077 c100.907,0,182.718-50.808,182.718-50.808l-0.76-112.006L272.164,340.276z"
+            ></path>
+            <polygon
+              points="510.149,229.122 544.316,216.616 272.164,106.524 0,216.616 272.164,316.279 489.527,236.677 489.527,352.607 475.795,352.607 475.795,408.354 521.312,408.354 521.312,352.607 510.149,352.607 "
+            ></polygon>
+          </g>
+        </g>
+      </g>
+    </svg>
+    <a href="#" class="font-bold text-sm mt-4">EdQuizzy</a>
+  </div>
+  <div class="flex justify-between items-center gap-32 w-full h-[500px]">
+    <div class="object-cover rounded-tl-2xl flex rounded-bl-2xl w-1/2">
+      <img
+        src="../../../assets/Login-bro 1.png"
+        alt="mobile login"
+        class="object-cover h-[100%]"
+      />
+    </div>
+    <div class="w-1/2">
+      <div class="mb-4 flex justify-center flex-col items-center">
+        <h1 class="mb-2 text-xl font-bold">Hello Again</h1>
+        <p>
+          Don't have an account yet?
+          <a href="/auth/signup" class="text-primary font-semibold">Sign up</a>
+        </p>
+      </div>
+      <form class="mt-8" [formGroup]="userForm" (ngSubmit)="handleSubmit()">
+        <div class="w-full my-4">
+          <input
+            type="email"
+            class="w-full outline-none rounded-2xl border p-2 px-4"
+            id="email"
+            name="email"
+            formControlName="email"
+            placeholder="Email"
+            required
+          />
+          <div
+            *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+            class="text-red-400 p-2"
+          >
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Email must be valid</div>
+          </div>
+        </div>
+        <div class="w-full">
+          <input
+            type="password"
+            class="w-full outline-none rounded-2xl border p-2 px-4"
+            id="password"
+            name="password"
+            formControlName="password"
+            placeholder="*********"
+            required
+            minlength="6"
+          />
+          <div
+            *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+            class="text-red-400 p-2"
+          >
+            <div *ngIf="password?.errors?.['required']">
+              Password is required
+            </div>
+            <div *ngIf="password?.errors?.['minLength']">
+              Password must be at least 6 characters long
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between items-center my-4">
+          <div class="flex gap-2 items-center">
+            <input type="checkbox" name="remember" id="" />
+            <label for="">Remember Me</label>
+          </div>
+          <a href="/auth/forgotpassword" class="text-primary"
+            >Forgot Password?</a
+          >
+        </div>
+        <div class="flex justify-center items-center w-auto my-8">
+          <button
+            type="submit"
+            class="bg-secondary px-12 py-2 rounded-full cursor-pointer text-white"
+            (load)="(loading)"
+            [disabled]="!userForm.valid"
+          >
+            {{ (loading && "Loading...") || "Sign In" }}
+          </button>
+        </div>
+
+        <div class="flex gap-5 mt-8 mb-4 justify-center items-center">
+          <div class="w-28 h-0.5 bg-gray-200"></div>
+          <p>Or Sign In with</p>
+          <div class="w-28 h-0.5 bg-gray-200"></div>
+        </div>
+
+        <div class="flex justify-evenly items-center mt-4">
+          <img src="../../../assets/Vector (3).png" alt="Google" />
+          <img
+            src="../../../assets/Apple-Logo--Streamline-Logos-Block.svg.png"
+            alt="Apple-Logo--Streamline-Logos-Block"
+          />
+          <img src="../../../assets/Vector (4).png" alt="Vector 4" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

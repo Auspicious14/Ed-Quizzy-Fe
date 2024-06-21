@@ -1,0 +1,10 @@
+<div class="h-full p-4 bg-primary">
+  <div class="app-navbar"></div>
+  <h1 class="text-center my-8 text-xl">
+    Select your level, view the courses available and start quiz!
+  </h1>
+  <div *ngIf="loading" class="w-full h-full flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="app-level"></div>
+</div>

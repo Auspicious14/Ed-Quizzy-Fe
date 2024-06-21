@@ -1,0 +1,83 @@
+<section class="p-4 px-12 mx-12">
+  <div *ngIf="loading" class="bg-white">Loading...</div>
+  <mat-progress-bar *ngIf="loading" mode="determinate"></mat-progress-bar>
+  <div class="md:grid grid-cols-1 gap-5">
+    <mat-expansion-panel
+      togglePosition="after"
+      *ngFor="!levelLoading; let level; of: levels; let i = index"
+      (click)="handleShow(i)"
+      class="my-2 md:my-0 bg-white shadow-md"
+    >
+      <mat-expansion-panel-header
+        class="bg-white flex justify-between items-center"
+      >
+        <div class="flex gap-4 items-center">
+          <img
+            src="../../assets/Document-Sign-1--Streamline-Free-Illustrations.svg.png"
+            alt="Document-Sign-1--Streamline-Free-Illustrations"
+            class="object-cover w-1/3"
+          />
+          <h1 class="text-2xl font-medium">{{ level?.level }} level</h1>
+        </div>
+
+        <!-- <button (click)="handleShow(i)">
+          <div class="flex items-center">
+            <p>View courses</p>
+            <svg
+              width="28px"
+              height="28px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7 10L12 15L17 10"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+        </button> -->
+      </mat-expansion-panel-header>
+      <div>
+        <mat-progress-bar
+          *ngIf="loading"
+          mode="indeterminate"
+        ></mat-progress-bar>
+        <div class="flex justify-end">
+          <div
+            *ngIf="!loading && show?.show && show?.index === i"
+            class="w-1/2 h-72 bg-white overflow-auto rounded-lg"
+          >
+            <div class="md:grid grid-cols-1">
+              <ul
+                *ngFor="let course of courses"
+                class="bg-white md:my-0 border-b p-4 hover:bg-gray-200"
+              >
+                <a
+                  routerLink="/courses/{{ course._id }}"
+                  class="flex gap-4 items-center"
+                >
+                  <h1 class="text-base font-medium">{{ course?.code }}</h1>
+                  <h1 class="text-base font-medium">
+                    {{ course?.title }}
+                  </h1>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</section>

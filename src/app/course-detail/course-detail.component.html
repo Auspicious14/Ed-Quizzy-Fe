@@ -1,0 +1,74 @@
+<div class="app-layout">
+  <div class="m-4">
+    <div class="flex gap-12">
+      <div class="w-[40%]">
+        <div class="w-full">
+          <img
+            src="{{ course.images[0].uri }}"
+            alt="{{ course.images[0].name }}"
+            class="w-full h-ful object-cover rounded-xl"
+          />
+        </div>
+        <ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig">
+          <div *ngFor="let img of course?.images">
+            <div class="w-1/2 h-1/2 object-cover">
+              <img
+                src="{{ img?.uri }}"
+                alt="{{ img?.name }}"
+                class="w-full h-full"
+              />
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+      <div class="w-[60%]">
+        <p class="text-3xl font-bold">
+          {{ course.title }}
+        </p>
+        <p class="text-xl font-semibold">{{ course.level }}L</p>
+        <p class="text-justify py-2">{{ course.description }}</p>
+
+        <div class="flex gap-24 w-full items-center justify-between mt-16">
+          <button class="w-1/2 bg-secondary text-white rounded-lg py-4">
+            <a href="#">Start Quiz</a>
+          </button>
+          <button
+            (click)="copyUrl()"
+            class="w-1/2 bg-secondary text-white rounded-lg py-4"
+          >
+            Share
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-tab-group>
+      <mat-tab label="Description"> {{ course.description }} </mat-tab>
+
+      <mat-tab label="Quiz">
+        <div class="my-4 grid grid-cols-4 gap-4 w-full">
+          <div *ngFor="let quiz of quizes">
+            <div class="shadow-md rounded-md">
+              <a
+                href="/quiz/{{ quiz._id }}"
+                class="w-full h-50 rounded-lg shadow-md"
+              >
+                <div class="px-4">
+                  <p class="font-semibold py-4">
+                    {{ quiz.name }}
+                  </p>
+                  <p>
+                    {{
+                      quiz.description.length > 20
+                        ? quiz.description.substring(0, 20) + "..."
+                        : quiz.description
+                    }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

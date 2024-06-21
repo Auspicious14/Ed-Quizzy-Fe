@@ -1,0 +1,32 @@
+<div class="app-layout">
+  <div class="m-4">
+    <!-- <p>{{ quiz }}</p> -->
+    <div class="my-4 grid grid-cols-4 gap-4 w-full">
+      <div *ngFor="let quiz of quizes">
+        <div class="w-full h-50 rounded-lg shadow-md">
+          <!-- <div class="w-auto">
+            <img
+              mat-card-image
+              src="{{ quiz.images[0].uri }}"
+              alt="{{ quiz.images[0].name }}"
+              class="object-scale-down rounded-lg"
+            />
+          </div> -->
+          <div class="px-4">
+            <p class="font-semibold py-4">
+              {{ quiz.name }}
+            </p>
+            <p>
+              {{
+                quiz.description.length > 20
+                  ? quiz.description.substring(0, 20) + "..."
+                  : quiz.description
+              }}
+            </p>
+            <P>{{ quiz.score }}</P>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

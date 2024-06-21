@@ -1,0 +1,125 @@
+<div class="app-layout">
+  <div class="m-4">
+    <h1 class="font-bold text-2xl">{{ quiz.name }}</h1>
+    <p>{{ quiz.description }}</p>
+    <div class="">
+      <p class="font-semibold">
+        <span>Duration: </span>{{ quiz.timeLimit }}mins
+      </p>
+      <p class="font-semibold"><span>Level: </span>{{ quiz.level }}L</p>
+      <p class="font-semibold"><span>Status: </span>{{ quiz.status }}</p>
+    </div>
+
+    <div class="w-[70%] mt-12">
+      <div class="w-full">
+        <div
+          *ngIf="
+            questions &&
+            questions.length > 0 &&
+            questionIndex < questions.length
+          "
+        >
+          <div class="flex gap-4">
+            <p class="font-semibold mt-1">{{ questionIndex + 1 }}.</p>
+            <div>
+              <h1 class="font-semibold text-xl mb-4 w-full text-justify">
+                {{ questions[questionIndex].question }}
+              </h1>
+
+              <div
+                *ngFor="
+                  let option of questions[questionIndex].options;
+                  let i = index
+                "
+              >
+                <div
+                  (click)="handleSaveAnswer(questionIndex, i, option)"
+                  class="cursor-pointer my-2 w-full rounded-lg flex justify-between inset-2 bg-gray-100 p-2"
+                >
+                  <p>{{ option }}</p>
+                  <div *ngIf="choosenAnswer == i">
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 -0.5 25 25"
+                      fill="blue"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        fill="currentColor"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path
+                          d="M5.5 12.5L10.167 17L19.5 8"
+                          stroke="#000000"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center mt-12">
+                <div
+                  *ngIf="
+                    questionIndex < questions.length && questionIndex !== 0
+                  "
+                >
+                  <button
+                    (click)="handleNext('Back')"
+                    class="bg-secondary p-3 px-6 text-white rounded-lg w-full"
+                  >
+                    Back
+                  </button>
+                </div>
+                <div class="flex justify-end items-center">
+                  <button
+                    (click)="handleNext('Next')"
+                    class="bg-secondary p-3 px-6 text-white rounded-lg"
+                  >
+                    {{
+                      questionIndex === questions.length - 1 ? "Submit" : "Next"
+                    }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!questions || questions.length === 0">
+          <button
+            class="bg-secondary py-2 px-8 text-center gap-10 flex justify-center items-center text-white rounded-md"
+            (click)="generateQuestions(quiz._id)"
+          >
+            {{ questionLoading ? "Loading..." : "Start Quiz" }}
+          </button>
+        </div>
+        <div *ngIf="questions.length > 0 && questionIndex == questions.length">
+          <div
+            class="text-xl font-bold text-center gap-10 flex justify-center items-center"
+          >
+            <div>
+              <h1 class="py-10 text-3xl">Score: {{ score }}</h1>
+              <div>
+                {{
+                  score < 10
+                    ? "Oops, you performed below average. Try harder next time"
+                    : "Well-done Scholar! You made me proud!"
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
